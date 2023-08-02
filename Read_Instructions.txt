@@ -1,0 +1,17 @@
+Hello everyone,
+
+This is .zip file which has a .py file Click_for_Output.py. It is a python file which reads the dataset and returns the
+the best optimal path and also gives the End-To-End Data Transmission Rate and the Latency.
+
+
+
+Steps to Run the file and get the output:
+
+1. Extract the .zip file and open the extracted folder.
+2. Double click on the Click_for_Output.py file to execute or run the file in a python idle.
+3. Wait for the execution to get over and to get .exe command window close by itself.
+4. After successfull execution there will be file named as Final_result in the same location where the code file is.
+5. Open and refer that file for the final result.
+
+Thankyou.
+😃👍
