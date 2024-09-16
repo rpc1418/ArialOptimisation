@@ -156,7 +156,7 @@ Visualizes the flight paths and locations using Plotly.
 
 The script visualizes the flight paths and locations. Here’s a sample visualization of how the data might look:
 
-![Example Visualization](path_to_image)
+![Example Visualization](path_to_image.png)
 
 ---
 
