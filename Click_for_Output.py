@@ -213,39 +213,46 @@ def tocheck():
 
 tocheck()
 
+
 def plot():
-    flightname=[]
-    nodelist=[]
-    latitudelist=[]
-    longitudelist=[]
+    # Initializing lists to gather the required data
+    flightname, nodelist, latitudelist, longitudelist = [], [], [], []
+
+    # Collect latitude, longitude, and flight information for nodes in `ptogs`
     for flight in ptogs:
-        path=flight[1]
+        path = flight[1]
         for node in path:
             nodelist.append(node)
             for i in airplanes:
-                if(i['name']==node):
+                if i['name'] == node:
                     latitudelist.append(float(i['latitude']))
-            for i in airplanes:
-                if(i['name']==node):
                     longitudelist.append(float(i['longitude']))
             flightname.append(path[0])
 
-    dictdata={'flightname':flightname,'nodename':nodelist,'latitude':latitudelist,'longitude':longitudelist}
-    dataf=pd.DataFrame(dictdata)
+    # Create DataFrame from the collected data
+    dictdata = {
+        'flightname': flightname,
+        'nodename': nodelist,
+        'latitude': latitudelist,
+        'longitude': longitudelist
+    }
+    dataf = pd.DataFrame(dictdata)
 
+    # Load the dataset for scatter map plot
+    df = pd.DataFrame(airplanes)
 
-    #for node plot
-    df = pd.read_csv(open(os.path.join(sys.path[0], "dataset.CSV"), 'r'))
-    fig = px.scatter_mapbox(df,lat='latitude',lon='longitude', hover_name="name")
-    fig.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=4, mapbox_center_lat = 41,
-        margin={"r":0,"t":0,"l":0,"b":0})
+    # Plotting nodes
+    fig = px.scatter_mapbox(df, lat='latitude', lon='longitude', hover_name="name",
+                            mapbox_style="open-street-map", zoom=4, center={'lat': 41, 'lon': -74})
+    
+    # Plotting paths
+    fig2 = px.line_mapbox(dataf, lat="latitude", lon="longitude", color="flightname", hover_name="nodename",
+                          mapbox_style="open-street-map", zoom=4, center={'lat': 41, 'lon': -74})
 
-    #for path plot
-    fig2= px.line_mapbox(dataf, lat="latitude", lon="longitude",color="flightname",hover_name="nodename",)
-    fig2.update_layout(mapbox_style="stamen-terrain", mapbox_zoom=4, mapbox_center_lat = 41,
-        margin={"r":0,"t":0,"l":0,"b":0})
+    # Display plots
     fig.show()
     fig2.show()
+
 
 plot()
 
